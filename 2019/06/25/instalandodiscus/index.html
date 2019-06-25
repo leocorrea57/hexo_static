@@ -5,20 +5,20 @@
   
 
   
-  <title>Criando Máquina virtual com o AWS | Trabalho P.I</title>
+  <title>Utilizando comentários no blog com Discus | Trabalho P.I</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Porque AWSDecidimos escolher o Aws por causa da sua praticidade, também a liçenca gratuita permite um bom nível de utilização. Mesmo que esse tipo de liçenca disponibilize apenas um tipo de configuraç">
-<meta name="keywords" content="aws">
+  <meta name="description" content="O Discus é uma secção de coentários completamente funcional e com suporte a comentários via Facebook e Twitter, entre outros. Para adicionar isso ao blog, é bem simples.  Criar conta DiscusPara começa">
+<meta name="keywords" content="discus">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Criando Máquina virtual com o AWS">
-<meta property="og:url" content="http://blogpi2.site/2019/06/24/aws/index.html">
+<meta property="og:title" content="Utilizando comentários no blog com Discus">
+<meta property="og:url" content="http://blogpi2.site/2019/06/25/instalandodiscus/index.html">
 <meta property="og:site_name" content="Trabalho P.I">
-<meta property="og:description" content="Porque AWSDecidimos escolher o Aws por causa da sua praticidade, também a liçenca gratuita permite um bom nível de utilização. Mesmo que esse tipo de liçenca disponibilize apenas um tipo de configuraç">
+<meta property="og:description" content="O Discus é uma secção de coentários completamente funcional e com suporte a comentários via Facebook e Twitter, entre outros. Para adicionar isso ao blog, é bem simples.  Criar conta DiscusPara começa">
 <meta property="og:locale" content="pt">
-<meta property="og:updated_time" content="2019-06-24T19:38:19.725Z">
+<meta property="og:updated_time" content="2019-06-25T18:53:27.889Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Criando Máquina virtual com o AWS">
-<meta name="twitter:description" content="Porque AWSDecidimos escolher o Aws por causa da sua praticidade, também a liçenca gratuita permite um bom nível de utilização. Mesmo que esse tipo de liçenca disponibilize apenas um tipo de configuraç">
+<meta name="twitter:title" content="Utilizando comentários no blog com Discus">
+<meta name="twitter:description" content="O Discus é uma secção de coentários completamente funcional e com suporte a comentários via Facebook e Twitter, entre outros. Para adicionar isso ao blog, é bem simples.  Criar conta DiscusPara começa">
   
   
     <link rel="icon" href="/favicon.png">
@@ -67,10 +67,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-aws" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-instalandodiscus" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/06/24/aws/" class="article-date">
-  <time datetime="2019-06-24T09:23:04.000Z" itemprop="datePublished">2019-06-24</time>
+    <a href="/2019/06/25/instalandodiscus/" class="article-date">
+  <time datetime="2019-06-25T14:10:50.000Z" itemprop="datePublished">2019-06-25</time>
 </a>
     
   </div>
@@ -81,7 +81,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Criando Máquina virtual com o AWS
+      Utilizando comentários no blog com Discus
     </h1>
   
 
@@ -89,18 +89,51 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Porque-AWS"><a href="#Porque-AWS" class="headerlink" title="Porque AWS"></a>Porque AWS</h2><p>Decidimos escolher o Aws por causa da sua praticidade, também a liçenca gratuita permite um bom nível de utilização. Mesmo que esse tipo de liçenca disponibilize apenas um tipo de configuração de Hardware dá maquina virtual, não houve nenhum problema por parte da Aws. </p>
-<h2 id="Configuracao-da-Maquina-Virtual"><a href="#Configuracao-da-Maquina-Virtual" class="headerlink" title="Configuração da Máquina Virtual"></a>Configuração da Máquina Virtual</h2><p>Escolhemos o Ubuntu Server 18.0.4 para hospedar o servidor. A configuração permitida era com 4x núcleos e apenas 1GB de Ram, porém serviu sem nenhum tipo de travamento para oque foi proposto. Criar a máquina foi simples e rápido. </p>
+        <p>O Discus é uma secção de coentários completamente funcional e com suporte a comentários via Facebook e Twitter, entre outros. Para adicionar isso ao blog, é bem simples. </p>
+<h3 id="Criar-conta-Discus"><a href="#Criar-conta-Discus" class="headerlink" title="Criar conta Discus"></a>Criar conta Discus</h3><p>Para começar, é necessário cirar uma conta no site do Discus, onde, após criada, você irá receber um shortaname, que será usado depois. </p>
+<h3 id="Adicionar-bloco-de-codigo-ao-blog"><a href="#Adicionar-bloco-de-codigo-ao-blog" class="headerlink" title="Adicionar bloco de código ao blog"></a>Adicionar bloco de código ao blog</h3><p>Primeiramente, precisamos do seguinte no nosso arquivo de configuração principal _condif.yml: </p>
+<pre><code class="bash">url: http://blogpi2.site
+root: /
+disqus_enabled: <span class="literal">true</span>
+disqus_shortname: nossoshortname</code></pre>
+<p>Note que é necessário colocar o shortname em uma das opções, pois é assim que o Discus irá associar os comentários com o site para a conta que fizemos. </p>
+<p>Depois disso, basta Adicionar esse código onde fica a secção que representa aonde você irá querer os comentários: </p>
+<pre><code class="bash">&lt;% <span class="keyword">if</span> (!index &amp;&amp; post.comments &amp;&amp; config.disqus_enabled &amp;&amp; config.disqus_shortname){ %&gt;
+&lt;section id=<span class="string">"comments"</span>&gt;
+
+&lt;div id=<span class="string">"disqus_thread"</span>&gt;&lt;/div&gt;
+&lt;script&gt;
+
+var disqus_config = <span class="function"><span class="title">function</span></span> () {
+    this.page.url = <span class="string">'&lt;%= config.url + '</span>/<span class="string">' + post.canonical_path %&gt;'</span>;
+    this.page.identifier = <span class="string">'&lt;%= post.id || post.canonical_path %&gt;'</span>;
+    this.page.title = <span class="string">'&lt;%= post.title %&gt;'</span>;
+};
+
+(<span class="function"><span class="title">function</span></span>() {
+var d = document, s = d.createElement(<span class="string">'script'</span>);
+s.src = <span class="string">'https://&lt;%= config.disqus_shortname %&gt;.disqus.com/embed.js'</span>;
+s.setAttribute(<span class="string">'data-timestamp'</span>, +new Date());
+(d.head || d.body).appendChild(s);
+})();
+&lt;/script&gt;
+&lt;noscript&gt;Please <span class="built_in">enable</span> JavaScript to view the &lt;a href=<span class="string">"https://disqus.com/?ref_noscript"</span>&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
+&lt;/section&gt;
+&lt;% } %&gt;
+</code></pre>
+<br>
+
+<p>Depois disso, o Hexo irá gerar a secção de comentários no fim de cada Blog.</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blogpi2.site/2019/06/24/aws/" data-id="cjxc652wh0000nfqkjx7g1kk2" class="article-share-link">Compartilhar</a>
+      <a data-url="http://blogpi2.site/2019/06/25/instalandodiscus/" data-id="cjxc652wy0007nfqkotqpeyrf" class="article-share-link">Compartilhar</a>
       
-        <a href="http://blogpi2.site/2019/06/24/aws/#disqus_thread" class="article-comment-link">Comentários</a>
+        <a href="http://blogpi2.site/2019/06/25/instalandodiscus/#disqus_thread" class="article-comment-link">Comentários</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aws/">aws</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/discus/">discus</a></li></ul>
 
     </footer>
   </div>
@@ -108,19 +141,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2019/06/24/hexonginx/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/06/25/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Mais Recente</strong>
       <div class="article-nav-title">
         
-          Hexo e o Nginx
+          Instalando o Hexo generator
         
       </div>
     </a>
   
   
-    <a href="/2019/06/24/personalizacoes/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2019/06/24/hexonginx/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Mais Antigo</strong>
-      <div class="article-nav-title">Personalizações</div>
+      <div class="article-nav-title">Hexo e o Nginx</div>
     </a>
   
 </nav>
@@ -143,9 +176,9 @@
   <script>
    
   var disqus_config = function () {
-      this.page.url = 'http://blogpi2.site/2019/06/24/aws/index.html';
-      this.page.identifier = '2019/06/24/aws/index.html';
-      this.page.title = 'Criando Máquina virtual com o AWS';
+      this.page.url = 'http://blogpi2.site/2019/06/25/instalandodiscus/index.html';
+      this.page.identifier = '2019/06/25/instalandodiscus/index.html';
+      this.page.title = 'Utilizando comentários no blog com Discus';
   };
    
   (function() {
@@ -245,7 +278,7 @@
 <script>
   var disqus_shortname = 'blogpi2';
   
-  var disqus_url = 'http://blogpi2.site/2019/06/24/aws/';
+  var disqus_url = 'http://blogpi2.site/2019/06/25/instalandodiscus/';
   
   (function(){
     var dsq = document.createElement('script');

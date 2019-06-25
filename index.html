@@ -42,11 +42,13 @@
         
           <a class="main-nav-link" href="/">Blog</a>
         
-          <a class="main-nav-link" href="/archives">Arquivos</a>
+          <a class="main-nav-link" href="/archives">Arquivo</a>
         
           <a class="main-nav-link" href="/apresentacao">Apresentacao Pessoal</a>
         
           <a class="main-nav-link" href="/techStack">TechStack</a>
+        
+          <a class="main-nav-link" href="/projetospessoais">Projetos Pessoais</a>
         
       </nav>
       <nav id="sub-nav">
@@ -64,8 +66,8 @@
   
     <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/06/24/hello-world/" class="article-date">
-  <time datetime="2019-06-24T19:38:19.725Z" itemprop="datePublished">2019-06-24</time>
+    <a href="/2019/06/25/hello-world/" class="article-date">
+  <time datetime="2019-06-25T18:53:27.889Z" itemprop="datePublished">2019-06-25</time>
 </a>
     
   </div>
@@ -76,7 +78,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/24/hello-world/">Instalando o Hexo generator</a>
+      <a class="article-title" href="/2019/06/25/hello-world/">Instalando o Hexo generator</a>
     </h1>
   
 
@@ -100,11 +102,90 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blogpi2.site/2019/06/24/hello-world/" data-id="cjxasmmay0002wxqkv54l6oc8" class="article-share-link">Compartilhar</a>
+      <a data-url="http://blogpi2.site/2019/06/25/hello-world/" data-id="cjxc652wq0002nfqkuu2fxk2i" class="article-share-link">Compartilhar</a>
       
-        <a href="http://blogpi2.site/2019/06/24/hello-world/#disqus_thread" class="article-comment-link">Comentários</a>
+        <a href="http://blogpi2.site/2019/06/25/hello-world/#disqus_thread" class="article-comment-link">Comentários</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
+    <article id="post-instalandodiscus" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/25/instalandodiscus/" class="article-date">
+  <time datetime="2019-06-25T14:10:50.000Z" itemprop="datePublished">2019-06-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/25/instalandodiscus/">Utilizando comentários no blog com Discus</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>O Discus é uma secção de coentários completamente funcional e com suporte a comentários via Facebook e Twitter, entre outros. Para adicionar isso ao blog, é bem simples. </p>
+<h3 id="Criar-conta-Discus"><a href="#Criar-conta-Discus" class="headerlink" title="Criar conta Discus"></a>Criar conta Discus</h3><p>Para começar, é necessário cirar uma conta no site do Discus, onde, após criada, você irá receber um shortaname, que será usado depois. </p>
+<h3 id="Adicionar-bloco-de-codigo-ao-blog"><a href="#Adicionar-bloco-de-codigo-ao-blog" class="headerlink" title="Adicionar bloco de código ao blog"></a>Adicionar bloco de código ao blog</h3><p>Primeiramente, precisamos do seguinte no nosso arquivo de configuração principal _condif.yml: </p>
+<pre><code class="bash">url: http://blogpi2.site
+root: /
+disqus_enabled: <span class="literal">true</span>
+disqus_shortname: nossoshortname</code></pre>
+<p>Note que é necessário colocar o shortname em uma das opções, pois é assim que o Discus irá associar os comentários com o site para a conta que fizemos. </p>
+<p>Depois disso, basta Adicionar esse código onde fica a secção que representa aonde você irá querer os comentários: </p>
+<pre><code class="bash">&lt;% <span class="keyword">if</span> (!index &amp;&amp; post.comments &amp;&amp; config.disqus_enabled &amp;&amp; config.disqus_shortname){ %&gt;
+&lt;section id=<span class="string">"comments"</span>&gt;
+
+&lt;div id=<span class="string">"disqus_thread"</span>&gt;&lt;/div&gt;
+&lt;script&gt;
+
+var disqus_config = <span class="function"><span class="title">function</span></span> () {
+    this.page.url = <span class="string">'&lt;%= config.url + '</span>/<span class="string">' + post.canonical_path %&gt;'</span>;
+    this.page.identifier = <span class="string">'&lt;%= post.id || post.canonical_path %&gt;'</span>;
+    this.page.title = <span class="string">'&lt;%= post.title %&gt;'</span>;
+};
+
+(<span class="function"><span class="title">function</span></span>() {
+var d = document, s = d.createElement(<span class="string">'script'</span>);
+s.src = <span class="string">'https://&lt;%= config.disqus_shortname %&gt;.disqus.com/embed.js'</span>;
+s.setAttribute(<span class="string">'data-timestamp'</span>, +new Date());
+(d.head || d.body).appendChild(s);
+})();
+&lt;/script&gt;
+&lt;noscript&gt;Please <span class="built_in">enable</span> JavaScript to view the &lt;a href=<span class="string">"https://disqus.com/?ref_noscript"</span>&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
+&lt;/section&gt;
+&lt;% } %&gt;
+</code></pre>
+<br>
+
+<p>Depois disso, o Hexo irá gerar a secção de comentários no fim de cada Blog.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blogpi2.site/2019/06/25/instalandodiscus/" data-id="cjxc652wy0007nfqkotqpeyrf" class="article-share-link">Compartilhar</a>
+      
+        <a href="http://blogpi2.site/2019/06/25/instalandodiscus/#disqus_thread" class="article-comment-link">Comentários</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/discus/">discus</a></li></ul>
+
     </footer>
   </div>
   
@@ -141,7 +222,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blogpi2.site/2019/06/24/hexonginx/" data-id="cjxasmmb30005wxqkfy0duxq9" class="article-share-link">Compartilhar</a>
+      <a data-url="http://blogpi2.site/2019/06/24/hexonginx/" data-id="cjxc652ww0005nfqkn263utqa" class="article-share-link">Compartilhar</a>
       
         <a href="http://blogpi2.site/2019/06/24/hexonginx/#disqus_thread" class="article-comment-link">Comentários</a>
       
@@ -185,7 +266,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blogpi2.site/2019/06/24/aws/" data-id="cjxasmmaq0000wxqkpszqyfx3" class="article-share-link">Compartilhar</a>
+      <a data-url="http://blogpi2.site/2019/06/24/aws/" data-id="cjxc652wh0000nfqkjx7g1kk2" class="article-share-link">Compartilhar</a>
       
         <a href="http://blogpi2.site/2019/06/24/aws/#disqus_thread" class="article-comment-link">Comentários</a>
       
@@ -230,12 +311,12 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blogpi2.site/2019/06/24/personalizacoes/" data-id="cjxasmmb50006wxqkijpy7rjr" class="article-share-link">Compartilhar</a>
+      <a data-url="http://blogpi2.site/2019/06/24/personalizacoes/" data-id="cjxc652x40008nfqkemjwe37s" class="article-share-link">Compartilhar</a>
       
         <a href="http://blogpi2.site/2019/06/24/personalizacoes/#disqus_thread" class="article-comment-link">Comentários</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo-tema-blog/">hexo tema blog</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blog/">blog</a></li></ul>
 
     </footer>
   </div>
@@ -259,19 +340,10 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/aws/">aws</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo-tema-blog/">hexo tema blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/aws/">aws</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/discus/">discus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li></ul>
     </div>
   </div>
 
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Nuvem de Tags</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/aws/" style="font-size: 10px;">aws</a> <a href="/tags/hexo-tema-blog/" style="font-size: 10px;">hexo tema blog</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a>
-    </div>
-  </div>
 
   
     
@@ -291,7 +363,11 @@
       <ul>
         
           <li>
-            <a href="/2019/06/24/hello-world/">Instalando o Hexo generator</a>
+            <a href="/2019/06/25/hello-world/">Instalando o Hexo generator</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/25/instalandodiscus/">Utilizando comentários no blog com Discus</a>
           </li>
         
           <li>
@@ -328,11 +404,13 @@
   
     <a href="/" class="mobile-nav-link">Blog</a>
   
-    <a href="/archives" class="mobile-nav-link">Arquivos</a>
+    <a href="/archives" class="mobile-nav-link">Arquivo</a>
   
     <a href="/apresentacao" class="mobile-nav-link">Apresentacao Pessoal</a>
   
     <a href="/techStack" class="mobile-nav-link">TechStack</a>
+  
+    <a href="/projetospessoais" class="mobile-nav-link">Projetos Pessoais</a>
   
 </nav>
     
